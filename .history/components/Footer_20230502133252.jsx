@@ -1,0 +1,1 @@
+import {Fot1, Fot2} from '../components/index'
