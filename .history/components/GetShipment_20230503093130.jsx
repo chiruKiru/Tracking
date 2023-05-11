@@ -1,11 +1,11 @@
 import { useState } from "react";
 import {str1} from '../components/SVG'
-export default ({getModel, setGetModel, getShipment}) => {
+export default ({getModel, setGetModel, getFund}) => {
   const [index , setIndex] = useState(0);
   const [singleShipmentData, setSingleShipmentData] = useState();
 
   const getShipmentData = async () => {
-    const getData = await getShipment(index);
+    const getData = await getFund(index);
     setSingleShipmentData(getData);
     console.log(getData)
   };

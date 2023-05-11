@@ -6,7 +6,7 @@ export default ({startModal, setStartModal, start}) => {
   const [singleShipmentData, setSingleShipmentData] = useState();
 
   const getShipmentData = async () => {
-    const getData = await getShipment(index);
+    const getData = await getFund(index);
     setSingleShipmentData(getData);
     console.log(getData)
   };

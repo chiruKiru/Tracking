@@ -27,12 +27,12 @@ import { TrackingContext } from "../Context/TrackingContext";
 const App = () => {
   const {
         currentUser,
-        createShipment,
-        getAllShipment,
-        completeShipment,
-        getShipment,
-        startShipment,
-        getShipmentsCount
+        createFund,
+        getAllTransaction,
+        completeFund,
+        getFund,
+        startFund,
+        getFundCount
   } = useContext(TrackingContext);
 
   const [createShipmentModel,setcreateShipmentModel] = useState(false);
@@ -44,7 +44,7 @@ const App = () => {
   const [allShipmentsdata,setallShipmentsdata] = useState();
 
   useEffect(()=>{
-    const getCampaingsData = getAllShipment;
+    const getCampaingsData = getAllTransaction;
       return async () => {
         const allData = await getCampaingsData;
         setallShipmentsdata(allData);
@@ -74,25 +74,25 @@ const App = () => {
         openProfile={openProfile}
         setOpenProfile = {setOpenProfile}
         currentUser={currentUser}
-        getShipmentsCount={getShipmentsCount}
+        getFundCount={getFundCount}
         />
 
         <CompleteShipment
         completeModel={completeModel}
         setCompleteModel = {setCompleteModel}
-        completeShipment = {completeShipment}
+        completeFund = {completeFund}
         />
 
         <GetShipment
           getModel={getModel}
           setGetModel = {setGetModel}
-          getShipment = {getShipment}
+          getFund = {getFund}
           />
 
         <StartShipment
           startModel = {startModel}
           setStartModel = {setGetModel}
-          startShipment = {startShipment}
+          startFund = {startFund}
           />
     </>
   )

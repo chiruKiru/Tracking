@@ -9,7 +9,7 @@ export default ({openProfile, setOpenProfile, setOpenProfile,}) => {
   });
 
   const changeStatus = () => {
-    completeShipment(completeShip);
+    completeFund(completeShip);
   };
 
   return completeModel ?(

@@ -14,17 +14,17 @@ import {
 
 const App = () => {
   const {
-        getShipment,
-        startShipment,
-        getShipmentsCount,
+        getFund,
+        startFund,
+        getFundCount,
 
 
-        createShipment,
-        getAllShipment,
-        completeShipment,
-        getShipment,
-        startShipment,
-        getShipmentsCount,
+        createFund,
+        getAllTransaction,
+        completeFund,
+        getFund,
+        startFund,
+        getFundCount,
         DaapName,
         currentUser
   } = useContext(TransactionContext);
@@ -38,7 +38,7 @@ const App = () => {
   const [allShipmentsdata,setallShipmentsdata] = useState(false);
 
   useEffect(()=>{
-    const getCampaingsData = getAllShipment;
+    const getCampaingsData = getAllTransaction;
       return async () => {
         const allData = await getCampaingsData;
         setallShipmentsdata(allData);
@@ -61,7 +61,7 @@ const App = () => {
 
       <Form
       createShipmentModel = {createShipmentModel}
-      createShipment = {createShipment}
+      createFund = {createFund}
       setcreateShipmentModel ={setcreateShipmentModel}
 
       />
@@ -69,25 +69,25 @@ const App = () => {
         openProfile={openProfile}
         setOpenProfile = {setOpenProfile}
         currentUser={currentUser}
-        getShipmentsCount={getShipmentsCount}
+        getFundCount={getFundCount}
         />
 
         <CompleteShipment
         completeModel={completeModel}
         setCompleteModel = {setCompleteModel}
-        completeShipment = {completeShipment}
+        completeFund = {completeFund}
         />
 
         <GetShipment
           getModel={getModel}
           setGetModel = {setGetModel}
-          getShipment = {getShipment}
+          getFund = {getFund}
           />
 
         <StartShipment
           startModel = {startModel}
           setStartModel = {setGetModel}
-          startShipment = {startShipment}
+          startFund = {startFund}
           />
     </>
   )

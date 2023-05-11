@@ -14,7 +14,7 @@ export const TransactionProvider =({ children })=> {
 
     const [currentAccount, setCurrentAccount] = useState("");
 
-    const createShipment = async (items) => {
+    const createFund = async (items) => {
         console.log(items);
         const {receiver,pickupTime,distance,price} = items;
             try {
@@ -23,7 +23,7 @@ export const TransactionProvider =({ children })=> {
                 const provider = new ethers.providers.Web3Provider(connection);
                 const signer = provider.getSigner();
                 const contract = fetchContract(signer);
-                const createItem = await contract.createShipment(
+                const createItem = await contract.createFund(
                     receiver,
                     new Date(pickupTime).getTime(),
                     distance,
@@ -38,7 +38,7 @@ export const TransactionProvider =({ children })=> {
             }
         };
     
-        const getAllShipment = async () => {
+        const getAllTransaction = async () => {
             try {
                 const provider = new ethers.providers.JsonRpcProvider();
                 const contract = fetchContract(provider);
@@ -59,7 +59,7 @@ export const TransactionProvider =({ children })=> {
             }
         };
     
-        const getShipmentsCount = async () => {
+        const getFundCount = async () => {
             try {
                 if (!window.ethereum) return "Install MetaMask";
                 
@@ -68,7 +68,7 @@ export const TransactionProvider =({ children })=> {
                 });
                 const provider = new ethers.providers.JsonRpcProvider();
                 const contract = fetchContract(provider);
-                const shipmentscount = await contract.getShipmentsCount(accounts[0]);
+                const shipmentscount = await contract.getFundCount(accounts[0]);
                 return shipmentscount.toNumber();
                 
             } catch (error) {
@@ -76,7 +76,7 @@ export const TransactionProvider =({ children })=> {
             }
         };
     
-        const completeShipment = async (completeShip) => {
+        const completeFund = async (completeShip) => {
             console.log(completeShip);
     
             const {receiver , index} = completeShip;
@@ -91,7 +91,7 @@ export const TransactionProvider =({ children })=> {
                 const provider = new ethers.providers.Web3Provider(connection);
                 const signer = provider.getSigner();
                 const contract = fetchContract(signer);
-                const transaction = await contract.completeShipment(
+                const transaction = await contract.completeFund(
                     accounts[0],
                     receiver,
                     index,
@@ -108,7 +108,7 @@ export const TransactionProvider =({ children })=> {
                 console.log('transaction completShipment',error);
             }
         };
-        const getShipment = async (index) => {
+        const getFund = async (index) => {
             console.log(index * 1);
             try{
                 if(!window.ethereum) return "Install MetaMask";
@@ -119,7 +119,7 @@ export const TransactionProvider =({ children })=> {
     
                 const provider = new ethers.providers.JsonRpcProvider();
                 const contract = fetchContract(provider);
-                const shipment = await contract.getShipment(accounts[0],index * 1);
+                const shipment = await contract.getFund(accounts[0],index * 1);
     
                 const SingleShipment = {
                     sender: shipment[0],
@@ -138,7 +138,7 @@ export const TransactionProvider =({ children })=> {
             }
         };
     
-        const startShipment = async(getProduct) => {
+        const startFund = async(getProduct) => {
             const {receiver,index} = getProduct;
     
             try{
@@ -153,7 +153,7 @@ export const TransactionProvider =({ children })=> {
             const provider = new ethers.providers.Web3Provider(connection);
             const signer = provider.getSigner();
             const contract = fetchContract(signer);
-            const shipment = await contract.startShipment(
+            const shipment = await contract.startFund(
                 accounts[0],
                 receiver,
                 index * 1
@@ -205,12 +205,12 @@ export const TransactionProvider =({ children })=> {
 
     return(
         <TransactionContext.Provider value={{
-            createShipment,
-            getAllShipment,
-            completeShipment,
-            getShipment,
-            startShipment,
-            getShipmentsCount,
+            createFund,
+            getAllTransaction,
+            completeFund,
+            getFund,
+            startFund,
+            getFundCount,
             DaapName,
             currentUser,}}>
             {children}

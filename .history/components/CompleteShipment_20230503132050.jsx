@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-export default ({completeModel, setStartModel, startShipment}) => {
+export default ({completeModel, setStartModel, startFund}) => {
   const [getProduct , setGetProduct] = useState({
     receiver: "",
     index: "",
   });
 
   const startShipping = () => {
-    startShipment(getProduct);
+    startFund(getProduct);
   };
 
   return startModel ?(

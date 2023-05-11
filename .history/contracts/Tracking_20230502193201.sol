@@ -2,120 +2,120 @@
 pragma solidity ^0.8.0;
 
 contract Tracking{
-    enum ShipmentStatus {PENDING, IN_TRANSIT, DELEVERED}
+    enum FundStatus {PENDING, IN_TRANSIT, DELEVERED}
 
-    struct Shipment {
+    struct Fund {
         address sender;
         address receiver;
         uint256 pickupTime;
         uint256 deliveryTime;
         uint256 distance;
         uint256 price;
-        ShipmentStatus status;
+        FundStatus status;
         bool isPaid;
     }
-    mapping(address => Shipment[]) public shipments;
-    uint256 public shipmentCount;
+    mapping(address => Fund[]) public funds;
+    uint256 public fundCount;
 
-    struct TypeShipment{
+    struct TypeFund{
         address sender;
         address receiver;
         uint256 pickupTime;
         uint256 deliveryTime;
         uint256 distance;
         uint256 price;
-        ShipmentStatus status;
+        FundStatus status;
         bool isPaid;
     }
-    TypeShipment[] typeShipments;
+    TypeFund[] typeFunds;
 
-    event ShipmentCreated(address indexed sender, address indexed receiver, uint256 pickuptime, uint256 distance, uint256 price);
-    event ShipmentInTransit(address indexed sender, address indexed receiver, uint256 pickuptime);
-    event ShipmentDelivered(address indexed sender, address indexed receiver, uint256 deliveryTime);
-    event ShipmentPaid(address indexed sender, address indexed receiver, uint256 amount);
+    event FundCreated(address indexed sender, address indexed receiver, uint256 pickuptime, uint256 distance, uint256 price);
+    event FundInTransit(address indexed sender, address indexed receiver, uint256 pickuptime);
+    event FundDelivered(address indexed sender, address indexed receiver, uint256 deliveryTime);
+    event FundPaid(address indexed sender, address indexed receiver, uint256 amount);
 
     constructor(){
-        shipmentCount = 0;
+        fundCount = 0;
     }
 
-    function createShipment(address _receiver, uint256 _pickupTime, uint256 _distance, uint256 _price) public payable{
+    function createFund(address _receiver, uint256 _pickupTime, uint256 _distance, uint256 _price) public payable{
             require(msg.value == _price,"Payment amount must match the price");   
 
-            Shipment memory shipment = Shipment(msg.sender, _receiver, _pickupTime, 0, _distance, _price, ShipmentStatus.PENDING, false);
+            Fund memory fund = Fund(msg.sender, _receiver, _pickupTime, 0, _distance, _price, FundStatus.PENDING, false);
 
-            shipments[msg.sender].push(shipment);
-            shipmentCount ++;
+            funds[msg.sender].push(fund);
+            fundCount ++;
 
-            typeShipments.push(
-                TypeShipment(
+            typeFunds.push(
+                TypeFund(
                     msg.sender, 
                     _receiver,
                      _pickupTime,
                       0, 
                       _distance, 
                       _price, 
-                      ShipmentStatus.PENDING,
+                      FundStatus.PENDING,
                     false
                 )
             );
 
-            emit ShipmentCreated(msg.sender, _receiver, _pickupTime, _distance, _price);
+            emit FundCreated(msg.sender, _receiver, _pickupTime, _distance, _price);
     }
 
 
-    function startShipment(address _sender,address _receiver, uint256 _index) public {
-        Shipment storage shipment = shipments[_sender][_index];
-        TypeShipment storage typeShipment = typeShipments[_index];
+    function startFund(address _sender,address _receiver, uint256 _index) public {
+        Fund storage fund = funds[_sender][_index];
+        TypeFund storage typeFund = typeFunds[_index];
 
-        require(shipment.receiver == _receiver,'Invalid receiver');
-        require(shipment.status == ShipmentStatus.PENDING,'Shipment already in transit.');
+        require(fund.receiver == _receiver,'Invalid receiver');
+        require(fund.status == FundStatus.PENDING,'Fund already in transit.');
 
 
-        shipment.status = ShipmentStatus.IN_TRANSIT;
-        typeShipment.status = ShipmentStatus.IN_TRANSIT;
+        fund.status = FundStatus.IN_TRANSIT;
+        typeFund.status = FundStatus.IN_TRANSIT;
 
-        emit ShipmentInTransit(_sender, _receiver, shipment.pickupTime);
+        emit FundInTransit(_sender, _receiver, fund.pickupTime);
     }
 
 
 
-    function completeShipment(address _sender, address _receiver, uint256 _index) public {
-        Shipment storage shipment = shipments[_sender][_index];
-        TypeShipment storage typeShipment = typeShipments[_index];
+    function completeFund(address _sender, address _receiver, uint256 _index) public {
+        Fund storage fund = funds[_sender][_index];
+        TypeFund storage typeFund = typeFunds[_index];
 
-        require(shipment.receiver == _receiver,'Invalid receiver');
-        require(shipment.status == ShipmentStatus.IN_TRANSIT,'Shipment not in transit.');
-        require(!shipment.isPaid, "Shipment already paid");
+        require(fund.receiver == _receiver,'Invalid receiver');
+        require(fund.status == FundStatus.IN_TRANSIT,'Fund not in transit.');
+        require(!fund.isPaid, "Fund already paid");
 
-        shipment.status = ShipmentStatus.DELEVERED;
-        typeShipment.status = ShipmentStatus.DELEVERED;
-        typeShipment.deliveryTime = block.timestamp;
-        shipment.deliveryTime = block.timestamp;
+        fund.status = FundStatus.DELEVERED;
+        typeFund.status = FundStatus.DELEVERED;
+        typeFund.deliveryTime = block.timestamp;
+        fund.deliveryTime = block.timestamp;
 
-        uint256 amount = shipment.price;
+        uint256 amount = fund.price;
 
-        payable(shipment.sender).transfer(amount);
+        payable(fund.sender).transfer(amount);
 
-        shipment.isPaid = true;
-        typeShipment.isPaid = true;
+        fund.isPaid = true;
+        typeFund.isPaid = true;
 
-        emit ShipmentDelivered(_sender, _receiver, shipment.deliveryTime);
-        emit ShipmentPaid(_sender, _receiver, amount);
+        emit FundDelivered(_sender, _receiver, fund.deliveryTime);
+        emit FundPaid(_sender, _receiver, amount);
         
     }
 
-    function getShipment(address _sender,uint256 _index) public view returns (address , address,uint256,uint256, uint256 ,uint256, ShipmentStatus, bool){
-         Shipment storage shipment = shipments[_sender][_index];
-         return (shipment.sender,shipment.receiver,shipment.pickupTime,shipment.deliveryTime,shipment.distance,shipment.price,shipment.status,shipment.isPaid);
+    function getFund(address _sender,uint256 _index) public view returns (address , address,uint256,uint256, uint256 ,uint256, FundStatus, bool){
+         Fund storage fund = funds[_sender][_index];
+         return (fund.sender,fund.receiver,fund.pickupTime,fund.deliveryTime,fund.distance,fund.price,fund.status,fund.isPaid);
 
     }
 
-    function getShipmentCount(address _sender) public view returns (uint256) {
-        return shipments[_sender].length;
+    function getFundCount(address _sender) public view returns (uint256) {
+        return funds[_sender].length;
     }
 
     function getAllTransactions()
-    public view returns(TypeShipment[] memory){
-        return typeShipments;
+    public view returns(TypeFund[] memory){
+        return typeFunds;
     }
 }

@@ -12,7 +12,7 @@ export default ({
       avatar:images.compShipment,
     },
     {
-      avatar:images.getShipment,
+      avatar:images.getFund,
     },
     {
       avatar:images.compShipment,

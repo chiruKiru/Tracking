@@ -3,7 +3,7 @@ import { useState } from "react";
 export default ({
   setCreateShipmentModel,
   createShipmentModel,
-  createShipment,
+  createFund,
 }) => {
 
   const [shipment, setShipment] = useState({
@@ -15,10 +15,10 @@ export default ({
 
   const  createItem = async() => {
     try {
-      await createShipment(shipment);
+      await createFund(shipment);
     } catch (error) {
       console.log("Wrong creating irem")
     }
   };
-  return createShipment
+  return createFund
 }

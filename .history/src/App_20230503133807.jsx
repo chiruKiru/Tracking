@@ -14,12 +14,12 @@ import {
 
 const App = () => {
   const {
-        createShipment,
-        getAllShipment,
-        completeShipment,
-        getShipment,
-        startShipment,
-        getShipmentsCount,
+        createFund,
+        getAllTransaction,
+        completeFund,
+        getFund,
+        startFund,
+        getFundCount,
         currentUser
   } = useContext(TransactionContext);
 
@@ -32,7 +32,7 @@ const App = () => {
   const [allShipmentsdata,setallShipmentsdata] = useState();
 
   useEffect(()=>{
-    const getCampaingsData = getAllShipment();
+    const getCampaingsData = getAllTransaction();
       return async () => {
         const allData = await getCampaingsData;
         setallShipmentsdata(allData);
@@ -55,7 +55,7 @@ const App = () => {
 
       <Form
       createShipmentModel = {createShipmentModel}
-      createShipment = {createShipment}
+      createFund = {createFund}
       setcreateShipmentModel ={setcreateShipmentModel}
 
       />
@@ -63,24 +63,24 @@ const App = () => {
         openProfile={openProfile}
         setOpenProfile = {setOpenProfile}
         currentUser={setOpenProfile}
-        getShipmentsCount={getShipmentsCount}
+        getFundCount={getFundCount}
         />
 
         <CompleteShipment
         completeModel={completeModel}
         setCompleteModel = {setCompleteModel}
-        completeShipment = {completeShipment}
+        completeFund = {completeFund}
         />
 
        <GetShipment
           getModel={getModel}
           setGetModel = {setGetModel}
-          getShipment = {getShipment}
+          getFund = {getFund}
           />
         <StartShipment
           startModel = {startModel}
           setStartModel = {setStartModel}
-          startShipment = {startShipment}
+          startFund = {startFund}
           />
     </>
   )

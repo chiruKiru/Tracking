@@ -1,14 +1,14 @@
 import { useState } from "react";
 import {Str1} from '../components/index'
 
-export default ({startModal, setStartModal, startShipment}) => {
+export default ({startModal, setStartModal, startFund}) => {
   const [getProduct , setGetProduct] = useState({
     receiver: "",
     index: "",
   });
 
   const startShipping = () => {
-    startShipment(getProduct);
+    startFund(getProduct);
   };
 
   return startModal ?(

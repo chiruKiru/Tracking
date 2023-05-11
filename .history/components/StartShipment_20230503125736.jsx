@@ -1,12 +1,12 @@
 import { useState } from "react";
 import {Str1} from '../components/index'
 
-export default ({startModal, setStartModal, getShipment}) => {
+export default ({startModal, setStartModal, getFund}) => {
   const [index , setIndex] = useState(0);
   const [singleShipmentData, setSingleShipmentData] = useState();
 
   const getShipmentData = async () => {
-    const getData = await getShipment(index);
+    const getData = await getFund(index);
     setSingleShipmentData(getData);
     console.log(getData)
   };

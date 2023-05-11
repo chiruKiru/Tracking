@@ -2,7 +2,7 @@ import Images from "../Images";
 
 import { useEffect, useState } from "react";
 
-export default ({openProfile, setOpenProfile, setOpenProfile,getShipmentsCount}) => {
+export default ({openProfile, setOpenProfile, setOpenProfile,getFundCount}) => {
   const [count , setCount] = useState();
 useEffect(()=>{
   const getShipmentsData = getShipmentsData();

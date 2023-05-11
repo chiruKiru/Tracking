@@ -2,13 +2,13 @@ import Images from "../Images";
 
 import { useEffect, useState } from "react";
 
-export default ({openProfile, setOpenProfile, setOpenProfile,getShipmentsCount}) => {
+export default ({openProfile, setOpenProfile, setOpenProfile,getFundCount}) => {
   const [count , setcount] = useState();
 useEffect(()=>{
   
 })
   const changeStatus = () => {
-    completeShipment(completeShip);
+    completeFund(completeShip);
   };
 
   return completeModel ?(

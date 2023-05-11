@@ -2,13 +2,13 @@ import Images from "../Images";
 
 import { useEffect, useState } from "react";
 
-export default ({openProfile, setOpenProfile, currentUser,getShipmentsCount}) => {
+export default ({openProfile, setOpenProfile, currentUser,getFundCount}) => {
   const [count , setCount] = useState();
 useEffect(()=>{
-  const getAllShipment = getShipmentsCount();
+  const getAllTransaction = getFundCount();
 
   return async () => {
-    const allData = await getShipmentsCount;
+    const allData = await getFundCount;
     setCount(allData)
   };
 },[]);
