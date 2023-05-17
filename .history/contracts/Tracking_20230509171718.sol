@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 contract Tracking{
-    enum FundStatus {PENDING, IN_TRANSIT, DELEVERED}
+    enum FundStatus {PENDING, STATE, CENTRAL}
 
     struct Fund {
         address sender;
@@ -30,8 +30,8 @@ contract Tracking{
     TypeFund[] typeFunds;
 
     event FundCreated(address indexed sender, address indexed receiver, uint256 pickuptime, uint256 distance, uint256 price);
-    event FundInTransit(address indexed sender, address indexed receiver, uint256 pickuptime);
-    event FundDelivered(address indexed sender, address indexed receiver, uint256 deliveryTime);
+    event FundState(address indexed sender, address indexed receiver, uint256 pickuptime);
+    event FundCentral(address indexed sender, address indexed receiver, uint256 deliveryTime);
     event FundPaid(address indexed sender, address indexed receiver, uint256 amount);
 
     constructor(){
@@ -71,8 +71,8 @@ contract Tracking{
         require(Fund.status == FundStatus.PENDING,'Fund already in transit.');
 
 
-        Fund.status = FundStatus.IN_TRANSIT;
-        typeFund.status = FundStatus.IN_TRANSIT;
+        Fund.status = FundStatus.STATE;
+        typeFund.status = FundStatus.STATE;
 
         emit Fund(_sender, _receiver, Fund.pickupTime);
     }
@@ -84,11 +84,11 @@ contract Tracking{
         TypeFund storage typeFund = typeFunds[_index];
 
         require(Fund.receiver == _receiver,'Invalid receiver');
-        require(Fund.status == FundStatus.IN_TRANSIT,'Fund not in transit.');
+        require(Fund.status == FundStatus.STATE,'Fund not in transit.');
         require(!Fund.isPaid, "Fund already paid");
 
-        Fund.status = FundStatus.DELEVERED;
-        typeFund.status = FundStatus.DELEVERED;
+        Fund.status = FundStatus.CENTRAL;
+        typeFund.status = FundStatus.CENTRAL;
         typeFund.deliveryTime = block.timestamp;
         Fund.deliveryTime = block.timestamp;
 
@@ -99,7 +99,7 @@ contract Tracking{
         Fund.isPaid = true;
         typeFund.isPaid = true;
 
-        emit FundDelivered(_sender, _receiver, Fund.deliveryTime);
+        emit FundCentral(_sender, _receiver, Fund.deliveryTime);
         emit FundPaid(_sender, _receiver, amount);
         
     }

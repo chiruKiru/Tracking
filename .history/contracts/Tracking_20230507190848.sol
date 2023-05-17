@@ -30,8 +30,8 @@ contract Tracking{
     TypeFund[] typeFunds;
 
     event FundCreated(address indexed sender, address indexed receiver, uint256 pickuptime, uint256 distance, uint256 price);
-    event FundInTransit(address indexed sender, address indexed receiver, uint256 pickuptime);
-    event FundDelivered(address indexed sender, address indexed receiver, uint256 deliveryTime);
+    event FundState(address indexed sender, address indexed receiver, uint256 pickuptime);
+    event FundCentral(address indexed sender, address indexed receiver, uint256 deliveryTime);
     event FundPaid(address indexed sender, address indexed receiver, uint256 amount);
 
     constructor(){
@@ -74,7 +74,7 @@ contract Tracking{
         fund.status = FundStatus.STATE;
         typeFund.status = FundStatus.STATE;
 
-        emit FundInTransit(_sender, _receiver, fund.pickupTime);
+        emit FundState(_sender, _receiver, fund.pickupTime);
     }
 
 
@@ -88,7 +88,7 @@ contract Tracking{
         require(!fund.isPaid, "Fund already paid");
 
         fund.status = FundStatus.CENTRAL;
-        typeFund.status = FundStatus.DELEVERED;
+        typeFund.status = FundStatus.CENTRAL;
         typeFund.deliveryTime = block.timestamp;
         fund.deliveryTime = block.timestamp;
 
@@ -99,7 +99,7 @@ contract Tracking{
         fund.isPaid = true;
         typeFund.isPaid = true;
 
-        emit FundDelivered(_sender, _receiver, fund.deliveryTime);
+        emit FundCentral(_sender, _receiver, fund.deliveryTime);
         emit FundPaid(_sender, _receiver, amount);
         
     }
