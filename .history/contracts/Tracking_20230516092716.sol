@@ -7,10 +7,10 @@ contract Tracking{
     struct Fund {
         address sender;
         address receiver;
-        uint256 pickupTime;
+        uint256 Req_Date;
         uint256 deliveryTime;
-        uint256 distance;
-        uint256 price;
+        uint256 from;
+        uint256 amount;
         string image;
         FundStatus status;
         bool isPaid;
@@ -21,18 +21,18 @@ contract Tracking{
     struct TypeFund{
         address sender;
         address receiver;
-        uint256 pickupTime;
+        uint256 Req_Date;
         uint256 deliveryTime;
-        uint256 distance;
-        uint256 price;
+        uint256 from;
+        uint256 amount;
         string image;
         FundStatus status;
         bool isPaid;
     }
     TypeFund[] typeFunds;
 
-    event FundCreated(address indexed sender, address indexed receiver, uint256 pickuptime, uint256 distance, uint256 price,string image);
-    event FundState(address indexed sender, address indexed receiver, uint256 pickuptime);
+    event FundCreated(address indexed sender, address indexed receiver, uint256 req_date, uint256 from, uint256 amount,string image);
+    event FundState(address indexed sender, address indexed receiver, uint256 req_date);
     event FundCentral(address indexed sender, address indexed receiver, uint256 deliveryTime);
     event FundPaid(address indexed sender, address indexed receiver, uint256 amount);
 
@@ -40,10 +40,10 @@ contract Tracking{
         fundCount = 0;
     }
 
-    function createFund(address _receiver, uint256 _pickupTime, uint256 _distance, uint256 _price,string memory image) public {
-            //require(msg.value == _price,"Payment amount must match the price");   
+    function createFund(address _receiver, uint256 _req_date, uint256 _from, uint256 _amount,string memory image) public {
+            //require(msg.value == _amount,"Payment amount must match the amount");   
 
-            Fund memory fund = Fund(msg.sender, _receiver, _pickupTime, 0, _distance, _price, image, FundStatus.PENDING, false);
+            Fund memory fund = Fund(msg.sender, _receiver, _req_date, 0, _from, _amount, image, FundStatus.PENDING, false);
 
             funds[msg.sender].push(fund);
             fundCount ++;
@@ -52,17 +52,17 @@ contract Tracking{
                 TypeFund(
                     msg.sender, 
                     _receiver,
-                     _pickupTime,
+                     _req_date,
                       0, 
-                      _distance, 
-                      _price, 
+                      _from, 
+                      _amount, 
                       image,
                       FundStatus.PENDING,
                     false
                 )
             );
 
-            emit FundCreated(msg.sender, _receiver, _pickupTime, _distance, _price,image);
+            emit FundCreated(msg.sender, _receiver, _req_date, _from, _amount,image);
     }
 
 
@@ -77,7 +77,7 @@ contract Tracking{
         fund.status = FundStatus.STATE;
         typeFund.status = FundStatus.STATE;
 
-        emit FundState(_sender, _receiver, fund.pickupTime);
+        emit FundState(_sender, _receiver, fund.Req_Date);
     }
 
     function startFund(address _sender,address _receiver, uint256 _index) public {
@@ -91,7 +91,7 @@ contract Tracking{
         fund.status = FundStatus.STATE;
         typeFund.status = FundStatus.STATE;
 
-        emit FundState(_sender, _receiver, fund.pickupTime);
+        emit FundState(_sender, _receiver, fund.Req_Date);
     }
 
 
@@ -109,7 +109,7 @@ contract Tracking{
         typeFund.deliveryTime = block.timestamp;
         fund.deliveryTime = block.timestamp;
 
-        uint256 amount = fund.price;
+        uint256 amount = fund.amount;
 
         payable(fund.sender).transfer(amount);
 
@@ -122,7 +122,7 @@ contract Tracking{
 
     function getFund(address _sender,uint256 _index) public view returns (address , address,uint256,uint256, uint256 ,uint256,string memory , FundStatus, bool){
          Fund storage fund = funds[_sender][_index];
-         return (fund.sender,fund.receiver,fund.pickupTime,fund.deliveryTime,fund.distance,fund.price,fund.image,fund.status,fund.isPaid);
+         return (fund.sender,fund.receiver,fund.Req_Date,fund.deliveryTime,fund.from,fund.amount,fund.image,fund.status,fund.isPaid);
 
     }
 
