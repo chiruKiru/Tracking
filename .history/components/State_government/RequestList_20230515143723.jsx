@@ -3,7 +3,7 @@ import React, { useState, useEffect,useContext } from 'react'
 import { TransactionContext } from '../../context/TrackingContext'
 
 import {
-  GetShipment,
+  TrackFund,
 } from '../../components/index.js';
 import GetPending from '../GetPending';
 

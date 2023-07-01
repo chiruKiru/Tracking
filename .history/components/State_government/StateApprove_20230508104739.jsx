@@ -4,7 +4,7 @@ import StateServices from './StateServices';
 
 import {
   Profile,
-  GetShipment,
+  TrackFund,
   StartShipment,
 } from '../../components/index.js';
 
@@ -24,7 +24,7 @@ const StateApprove = () => {
   return (
     <>
 
-       <GetShipment
+       <TrackFund
           getModel={getModel}
           setGetModel = {setGetModel}
           getFund = {getFund}

@@ -4,7 +4,7 @@ import GetPending from '../GetPending';
 
 import {
   Profile,
-  GetShipment,
+  TrackFund,
 } from '../index.js';
 import CitizenService from './CitizenService';
 
@@ -37,7 +37,7 @@ const CitizenHome = () => {
         currentUser={currentUser}
         getFundCount={getFundCount}
         />
-      <GetShipment
+      <TrackFund
     </>
   )
 

@@ -3,7 +3,7 @@ import { TransactionContext } from '../../context/TrackingContext'
 
 import {
   Profile,
-  GetShipment,
+  TrackFund,
 } from '../index.js';
 import CitizenService from './CitizenService';
 
@@ -38,7 +38,7 @@ const CitizenHome = () => {
         getFundCount={getFundCount}
         />
 
-       <GetShipment
+       <TrackFund
           getModel={getModel}
           setGetModel = {setGetModel}
           getFund = {getFund}

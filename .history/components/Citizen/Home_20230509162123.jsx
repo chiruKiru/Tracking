@@ -1,10 +1,10 @@
 import React, { useState, useEffect,useContext } from 'react'
 import { TransactionContext } from '../../context/TrackingContext'
-import GetShipment from '../GetShipment';
+import TrackFund from '../TrackFund';
 
 import {
   Profile,
-  GetShipment,
+  TrackFund,
 } from '../index.js';
 import CitizenService from './CitizenService';
 
@@ -37,7 +37,7 @@ const CitizenHome = () => {
         currentUser={currentUser}
         getFundCount={getFundCount}
         />
-       <GetShipment
+       <TrackFund
           getModel={getModel}
           setGetModel = {setGetModel}
           getFund = {getFund}

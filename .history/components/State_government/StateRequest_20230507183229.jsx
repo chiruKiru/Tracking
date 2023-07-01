@@ -7,7 +7,7 @@ import {
   Form,
   Services,
   Profile,
-  GetShipment,
+  TrackFund,
   CompleteShipment,
   StartShipment,
 } from '../../components/index.js';

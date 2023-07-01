@@ -3,7 +3,7 @@ import { TransactionContext } from '../../context/TrackingContext'
 
 import {
   Profile,
-  GetShipment,
+  TrackFund,
   StartShipment,
 } from '../../components/index.js';
 

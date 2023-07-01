@@ -9,7 +9,7 @@ import {
   Form,
   Services,
   Profile,
-  GetShipment,
+  TrackFund,
   CompleteShipment,
   StartShipment,
 } from '../components/index.js';
@@ -45,7 +45,7 @@ const App = () => {
 
 import {
   Profile,
-  GetShipment,
+  TrackFund,
 } from '../index.js';
 import CitizenService from './CitizenService';
 
@@ -79,7 +79,7 @@ const CitizenHome = () => {
         getFundCount={getFundCount}
         />
 
-       <GetShipment
+       <TrackFund
           getModel={getModel}
           setGetModel = {setGetModel}
           getFund = {getFund}

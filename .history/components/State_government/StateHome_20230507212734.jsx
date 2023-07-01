@@ -4,7 +4,7 @@ import StateServices from './StateServices';
 
 import {
   Profile,
-  GetShipment,
+  TrackFund,
   StartShipment,
 } from '../../components/index.js';
 
@@ -53,7 +53,7 @@ const App = () => {
         getFundCount={getFundCount}
         />
 
-       <GetShipment
+       <TrackFund
           getModel={getModel}
           setGetModel = {setGetModel}
           getFund = {getFund}

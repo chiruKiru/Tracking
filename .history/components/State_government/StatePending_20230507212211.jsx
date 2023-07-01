@@ -4,7 +4,7 @@ import StateServices from './StateServices';
 
 import {
   Profile,
-  GetShipment,
+  TrackFund,
   StartShipment,
 } from '../../components/index.js';
 

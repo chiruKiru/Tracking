@@ -4,7 +4,7 @@ import GetPending from '../GetPending';
 
 import {
   Profile,
-  GetShipment,
+  TrackFund,
 } from '../index.js';
 import CitizenService from './CitizenService';
 

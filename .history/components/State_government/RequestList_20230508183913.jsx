@@ -42,7 +42,7 @@ import {
   Form,
   Services,
   Profile,
-  GetShipment,
+  TrackFund,
   CompleteShipment,
   StartShipment,
 } from '../components/index.js';
@@ -74,7 +74,7 @@ const App = () => {
 
   return (
     <>
-       <GetShipment
+       <TrackFund
           getModel={getModel}
           setGetModel = {setGetModel}
           getFund = {getFund}

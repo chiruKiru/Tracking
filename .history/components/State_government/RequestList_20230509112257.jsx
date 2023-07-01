@@ -38,7 +38,7 @@ import React, { useState, useEffect,useContext } from 'react'
 import { TransactionContext } from '../../context/TrackingContext'
 
 import {
-  GetShipment,
+  TrackFund,
 } from '../../components/index.js';
 
 
@@ -63,7 +63,7 @@ const App = () => {
 
   return (
     <>
-       <GetShipment
+       <TrackFund
           getModel={getModel}
           setGetModel = {setGetModel}
           getFund = {getFund}

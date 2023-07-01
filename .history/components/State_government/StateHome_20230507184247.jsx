@@ -4,7 +4,7 @@ import Request from '../Citizen/Request';
 
 import {
   Profile,
-  GetShipment,
+  TrackFund,
 } from '../index.js';
 
 
@@ -42,7 +42,7 @@ const StateHome = () => {
         getFundCount={getFundCount}
         />
 
-       <GetShipment
+       <TrackFund
           getModel={getModel}
           setGetModel = {setGetModel}
           getFund = {getFund}

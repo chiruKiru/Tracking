@@ -8,7 +8,7 @@ import {
   Form,
   Services,
   Profile,
-  GetShipment,
+  TrackFund,
   CompleteShipment,
   StartShipment,
 } from '../Components/index.js';
@@ -74,7 +74,7 @@ const App = () => {
         completeFund = {completeFund}
         />
 
-        <GetShipment
+        <TrackFund
           getModel={getModel}
           setGetModel = {setGetModel}
           getFund = {getFund}

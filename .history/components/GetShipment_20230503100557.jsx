@@ -1,9 +1,9 @@
 import React from 'react'
 
-const GetShipment = () => {
+const TrackFund = () => {
   return (
-    <div>GetShipment</div>
+    <div>TrackFund</div>
   )
 }
 
-export default GetShipment
+export default TrackFund

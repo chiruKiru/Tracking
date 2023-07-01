@@ -4,7 +4,7 @@ import { TransactionContext } from '../../context/TrackingContext'
 import {
   Services,
   Profile,
-  GetShipment,
+  TrackFund,
   CompleteShipment,
   StartShipment,
 } from '../../components/index.js';
@@ -55,7 +55,7 @@ const App = () => {
         getFundCount={getFundCount}
         />
 
-       <GetShipment
+       <TrackFund
           getModel={getModel}
           setGetModel = {setGetModel}
           getFund = {getFund}
